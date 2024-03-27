@@ -28,6 +28,7 @@ jobs:
         with:
           arches: 'amd64 arm64'
           file: Containerfile
+
       - name: Log in to ghcr.io
         uses: redhat-actions/podman-login@v1
         with:
@@ -37,4 +38,4 @@ jobs:
 
       - name: Push to registry
         id: push-to-ghcr
-        run: podman push ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        run: podman push build ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
