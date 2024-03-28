@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build and push container
+      - name: Build container
         uses: coreos/actions-lib/build-container@main
         with:
           arches: 'amd64 arm64'

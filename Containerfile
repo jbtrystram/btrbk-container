@@ -1,4 +1,4 @@
-FROM docker.io/alpine:latest
+FROM quay.io/fedora/fedora-minimal:latest
 
 LABEL org.opencontainers.image.source="https://github.com/jbtrystram/btrbk-container"
 
