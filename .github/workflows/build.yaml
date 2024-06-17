@@ -23,12 +23,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build container
-        uses: coreos/actions-lib/build-container@main
-        with:
-          arches: 'amd64 arm64'
-          file: Containerfile
-
       - name: Log in to ghcr.io
         uses: redhat-actions/podman-login@v1
         with:
@@ -36,6 +30,15 @@ jobs:
             password: ${{ secrets.GITHUB_TOKEN }}
             registry: ${{ env.IMAGE_REGISTRY }}
 
-      - name: Push to registry
-        id: push-to-ghcr
-        run: podman push build ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      - name: Build and push container
+        uses: coreos/actions-lib/build-container@main
+        with:
+          arches: 'amd64 arm64'
+          file: Containerfile
+          credentials: ${{ secrets.QUAY_AUTH }}
+          push: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} 
+
+
+          #      - name: Push to registry
+          #id: push-to-ghcr
+          # run: podman push build ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
