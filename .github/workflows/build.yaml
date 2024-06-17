@@ -6,7 +6,7 @@ on:
     - cron:  '0 0 * * MON'
 
 env:
-  IMAGE_NAME: btrbk-container
+  IMAGE_NAME: btrbk
   IMAGE_TAG: latest
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
@@ -35,8 +35,8 @@ jobs:
         with:
           arches: 'amd64 arm64'
           file: Containerfile
-          credentials: ${{ secrets.QUAY_AUTH }}
-          push: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} 
+          credentials: ${{ env.REGISTRY_AUTH_FILE }}
+          push: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}
 
 
           #      - name: Push to registry
