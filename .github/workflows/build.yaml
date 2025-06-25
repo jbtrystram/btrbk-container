@@ -4,6 +4,8 @@ on:
   push:
   schedule:
     - cron:  '0 0 * * MON'
+  workflow_dispatch:
+    
 
 env:
   IMAGE_NAME: btrbk
@@ -38,7 +40,3 @@ jobs:
           credentials: ${{ env.REGISTRY_AUTH_FILE }}
           push: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}
 
-
-          #      - name: Push to registry
-          #id: push-to-ghcr
-          # run: podman push build ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
